@@ -1,0 +1,54 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Teste 1
+      id: teste-1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Teste 1
+        setup-command: ''
+        command: printf "1.5\n3.5\n5\n" | python exercicio_1.py
+        input: ''
+        expected-output: '3.3'
+        comparison-method: contains
+        timeout: 1
+        max-score: 1
+    - name: Teste 2
+      id: teste-2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Teste 2
+        setup-command: ''
+        command: printf "90\n" | python exercicio_2.py
+        input: ''
+        expected-output: '180'
+        comparison-method: contains
+        timeout: 1
+        max-score: 1
+    - name: Teste 3
+      id: teste-3
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Teste 3
+        setup-command: ''
+        command: printf "7\n" | python exercicio_3.py
+        input: ''
+        expected-output: mpar
+        comparison-method: contains
+        timeout: 1
+        max-score: 1
+    - name: Teste 4
+      id: teste-4
+      uses: classroom-resources/autogradi
